@@ -1,5 +1,4 @@
 <template>
-  <form>
       <h2>Login</h2>
       <div class="container">
         <form>
@@ -41,28 +40,9 @@
     <!-- Register buttons -->
     <div class="text-center">
       <p>Not a member? <a href="#!">Register</a></p>
-      <p>or sign up with:</p>
-      <MDBBtn color="primary" floating class="mx-1">
-        <MDBIcon iconStyle="fab" icon="facebook-f"/>>
-      </MDBBtn>
-
-      <MDBBtn color="primary" floating class="mx-1">
-        <MDBIcon iconStyle="fab" icon="google"/>
-      </MDBBtn>
-
-      <MDBBtn color="primary" floating class="mx-1">
-        <MDBIcon iconStyle="fab" icon="twitter"/>
-      </MDBBtn>
-
-      <MDBBtn color="primary" floating class="mx-1">
-        <MDBIcon iconStyle="fab" icon="github"/>
-      </MDBBtn>
     </div>
   </form>
-      </div>
-        
-
-  </form>
+</div>
 </template>
 
 <script>
