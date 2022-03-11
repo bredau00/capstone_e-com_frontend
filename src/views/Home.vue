@@ -54,13 +54,6 @@ import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImg, MDBBtn, md
           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
         },
       })
-        .then((response) => response.json())
-        .then((json) => {
-          this.products = json;
-        })
-        .catch((err) => {
-          alert("User not logged in");
-        });
     } else {
       alert("User not logged in");
       this.$router.push({ name: "Login" });
