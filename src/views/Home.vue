@@ -5,8 +5,9 @@
       <div class="row">
         <div class="col-4">
           <MDBCard v-for="(product, index) in products" :key="index" >
-            <a v-mdb-ripple="{ color: 'light' }">
+            <a v-mdb-ripple="{ color: 'light' }" class="card">
               <MDBCardImg :src="product.img_front" :alt="product.title" />
+              <MDBCardImg :src="product.img_back" class="img-top" :alt="product.title" />
             </a>
             <MDBCardBody>
               <MDBCardTitle>{{ product.title }}</MDBCardTitle>
@@ -69,3 +70,18 @@ import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImg, MDBBtn, md
   
 
 </script>
+
+<style>
+
+.card:hover .img-top {
+        display: inline;
+    }
+
+.card .img-top {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 99;
+    }
+</style>
