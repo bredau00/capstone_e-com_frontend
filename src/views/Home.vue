@@ -2,9 +2,10 @@
   <div class="home">
     <h2>Home</h2>
     <div class="container">
-      <div class="row">
-        <div class="col-3">
-          <MDBCard v-for="(product, index) in products" :key="index" >
+      <div v-if="products.length" class="row">
+        <div v-for="(product, index) in products" :key="index" class="col">
+          <!-- Project Card -->
+          <MDBCard  >
             <a v-mdb-ripple="{ color: 'light' }" class="card">
               <MDBCardImg :src="product.img_front" :alt="product.title" />
               <MDBCardImg :src="product.img_back" class="img-top" :alt="product.title" />
@@ -26,8 +27,12 @@
           </MDBCard>
         </div>
       </div>
+      <div v-else><p>loading</p></div>
     </div>
+    
   </div>
+
+<!-- Single project modal -->
   <MDBModal
     id="exampleModal"
     tabindex="-1"
@@ -41,18 +46,17 @@
     <MDBModalBody>
       <MDBCard class="mb-3">
         <MDBRow class="g-0">
-          <MDBCol md="4">
+          <MDBCol md="4"> 
             <MDBCardImg fluid src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.webp" alt="..."/>
           </MDBCol>
           <MDBCol md="8">
             <MDBCardBody>
-              <MDBCardTitle>Card title</MDBCardTitle>
+              <MDBCardTitle></MDBCardTitle>
               <MDBCardText>
-                This is a wider card with supporting text below as a natural lead-in to
-                additional content. This content is a little bit longer.
+                
               </MDBCardText>
               <MDBCardText>
-                <small class="text-muted">Last updated 3 mins ago</small>
+                <small class="text-muted"></small>
               </MDBCardText>
             </MDBCardBody>
           </MDBCol>
@@ -64,10 +68,12 @@
       <MDBBtn color="primary">Save changes</MDBBtn>
     </MDBModalFooter>
   </MDBModal>
+
 </template>
 
 <script>
-import { 
+import axios from "axios";
+import {
   MDBCard, 
   MDBCardBody, 
   MDBCardTitle, 
@@ -86,6 +92,7 @@ import {
   import { ref } from 'vue';
 
   export default {
+    props: ["id"],
     data() {
     return {
       products: [],
@@ -121,7 +128,6 @@ import {
       };
     },
     mounted() {
-    
       fetch("https://eccomerce-backend.herokuapp.com/products", {
         method: "GET",
         headers: {
@@ -132,9 +138,19 @@ import {
         .then((json) => {
           this.products = json;
         })
-  }
+
+      fetch("https://eccomerce-backend.herokuapp.com/products" + this.id, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+        })
+    },
   };
-  
 
 </script>
 

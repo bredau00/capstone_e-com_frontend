@@ -1,6 +1,6 @@
 <template>
     <MDBNavbar expand="lg" light bg="light" container>
-    <MDBNavbarBrand href="#">The Moden Guy</MDBNavbarBrand>
+    <MDBNavbarBrand href="#">The Modern Junkie</MDBNavbarBrand>
     <MDBNavbarToggler
       @click="collapse1 = !collapse1"
       target="#navbarSupportedContent"

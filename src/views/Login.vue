@@ -1,7 +1,8 @@
 <template>
-      <h2>Login</h2>
-      <div class="container">
-        <form>
+      
+<div class="container border">
+  <h2>Login</h2>
+  <form>
     <!-- Email input -->
     <MDBInput
       type="email"

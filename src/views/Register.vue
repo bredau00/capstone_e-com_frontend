@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container border">
     <h2>Register</h2>
     <form>
     <!-- 2 column grid layout with text inputs for the first and last names -->
