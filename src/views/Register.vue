@@ -1,57 +1,49 @@
 <template>
-<div class="container border">
+<div class="container border mt-5 pt-4">
     <h2>Register</h2>
-    <form>
-    <!-- 2 column grid layout with text inputs for the first and last names -->
+    <form @submit.prevent="register" class="form neu-border">
     <MDBRow class="mb-4">
       <MDBCol>
         <MDBInput
           type="text"
-          label="First name"
-          id="form3FirstName"
-          v-model="form3FirstName"
-        />
-      </MDBCol>
-      <MDBCol>
-        <MDBInput
-          type="text"
-          label="Last name"
-          id="form3LastName"
-          v-model="form3LastName"
+          label="fullname"
+          v-model="name"
+          id="name"
+          required
         />
       </MDBCol>
     </MDBRow>
     <!-- Email input -->
     <MDBInput
-      type="email"
       label="Email address"
-      id="form3Email"
-      v-model="form3Email"
+      type="email"
+      v-model="email"
+      required
+      wrapperClass="mb-4"
+    />
+    <!-- Contact -->
+    <MDBInput
+      label="Contact"
+      type="text"
+      v-model="contact"
+      required
       wrapperClass="mb-4"
     />
     <!-- Password input -->
     <MDBInput
-      type="password"
       label="Password"
-      id="form3Password"
-      v-model="form3Password"
+      type="password"
+      v-model="password"
+      required
       wrapperClass="mb-4"
     />
 
-    <!-- Checkbox -->
-    <MDBCheckbox
-      label="Remember me"
-      id="form3SubscribeCheck"
-      v-model="form3SubscribeCheck"
-      wrapperClass="d-flex justify-content-center mb-4"
-    />
-
     <!-- Submit button -->
-    <MDBBtn color="primary" block class="mb-4"> Sign up </MDBBtn>
+    <MDBBtn color="primary" type="submit" block class="mb-4"> Sign up </MDBBtn>
 
     <!-- Register buttons -->
     <div class="text-center">
-      <p>Already registered</p>
+      <a href="./login">Already registered</a>
     </div>
   </form>
 </div>
@@ -69,6 +61,14 @@ import {
   } from "mdb-vue-ui-kit";
   import { ref } from "vue";
   export default {
+    data() {
+    return {
+      name: "",
+      email: "",
+      contact: "",
+      password: "",
+    };
+  },
     components: {
       MDBRow,
       MDBCol,
@@ -92,6 +92,31 @@ import {
         form3SubscribeCheck
       };
     },
+    methods: {
+      register() {
+        fetch("https://eccomerce-backend.herokuapp.com/users", {
+          method: "POST",
+          body: JSON.stringify({
+            name: this.name,
+            email: this.email,
+            contact: this.contact,
+            password: this.password,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            alert("User registered");
+            localStorage.setItem("jwt", json.jwt);
+            this.$router.push({ name: "Home" });
+          })
+          .catch((err) => {
+            alert(err);
+          });
+        },
+  },
   };
 </script>
 

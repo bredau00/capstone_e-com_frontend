@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-5 pt-4">
       <div class="row">
           <h2>Contact Me</h2>
           <div class="col-6">

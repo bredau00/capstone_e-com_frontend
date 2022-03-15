@@ -1,35 +1,79 @@
 <template>
-  <div class="home">
-    <h2>Home</h2>
-    <div class="container">
-      <div v-if="products.length" class="row">
-        <div v-for="(product, index) in products" :key="index" class="col">
-          <!-- Project Card -->
-          <MDBCard  >
-            <a v-mdb-ripple="{ color: 'light' }" class="card">
-              <MDBCardImg :src="product.img_front" :alt="product.title" />
-              <MDBCardImg :src="product.img_back" class="img-top" :alt="product.title" />
-            </a>
-            <MDBCardBody>
-              <MDBCardTitle>{{ product.title }}</MDBCardTitle>
-                <MDBCardText>R{{ product.price }}</MDBCardText>
-              <MDBBtn tag="a" href="#!" color="primary">add to cart</MDBBtn>
+  <div class="home pb-5">
+    
+    <div class="container mt-5 pt-2 pb-5"><h2>Home</h2>
+      <div v-if="products.length=4" class="row p-b-5">
+        <!-- Search form -->
+        <form class="d-flex input-group w-auto">
+          <input
+            type="search"
+            class="form-control"
+            placeholder="search name"
+            aria-label="Search"
+            v-model="search"
+          />
+        </form>
 
-              <!-- Button trigger modal -->
-              <MDBBtn
-                color="primary"
-                aria-controls="exampleModal"
-                @click="exampleModal=true"
-              >
-                View Product
-              </MDBBtn>
-            </MDBCardBody>
-          </MDBCard>
+        <!-- products -->
+        <div class="row">
+          <div v-for="(product, index) in filterProducts" :key="index" class="col">
+            <!-- Project Card -->
+            <MDBCard  style="max-width: 255px">
+              <a v-mdb-ripple="{ color: 'light' }" class="card">
+                <MDBCardImg :src="product.img_front" :alt="product.title" />
+                <MDBCardImg :src="product.img_back" class="img-top" :alt="product.title" />
+              </a>
+              <MDBCardBody>
+                <MDBCardTitle>{{ product.title }}</MDBCardTitle>
+                  <MDBCardText>{{ product.category }}</MDBCardText>
+                  <MDBCardText>R{{ product.price }}</MDBCardText>
+                <MDBBtn tag="a" href="#!" color="primary">add to cart</MDBBtn>
+
+                <!-- Button trigger modal -->
+                <MDBBtn
+                  color="primary"
+                  aria-controls="exampleModal"
+                  @click="exampleModal=true"
+                >
+                  View Product
+                </MDBBtn>
+              </MDBCardBody>
+            </MDBCard>
+        </div>
+        
+        </div>
+                <div class="row">
+          <div v-for="(product, index) in filterProducts" :key="index" class="col">
+            <!-- Project Card -->
+            <MDBCard  style="max-width: 255px">
+              <a v-mdb-ripple="{ color: 'light' }" class="card">
+                <MDBCardImg :src="product.img_front" :alt="product.title" />
+                <MDBCardImg :src="product.img_back" class="img-top" :alt="product.title" />
+              </a>
+              <MDBCardBody>
+                <MDBCardTitle>{{ product.title }}</MDBCardTitle>
+                  <MDBCardText>{{ product.category }}</MDBCardText>
+                  <MDBCardText>R{{ product.price }}</MDBCardText>
+                <MDBBtn tag="a" href="#!" color="primary">add to cart</MDBBtn>
+
+                <!-- Button trigger modal -->
+                <MDBBtn
+                  color="primary"
+                  aria-controls="exampleModal"
+                  @click="exampleModal=true"
+                >
+                  View Product
+                </MDBBtn>
+              </MDBCardBody>
+            </MDBCard>
+        </div>
+        
         </div>
       </div>
-      <div v-else><p>loading</p></div>
+
+      <div v-else><p>loading...</p></div>
+
     </div>
-    
   </div>
 
 <!-- Single project modal -->
@@ -100,7 +144,8 @@ import {
       category: "",
       description: "",
       img: "",
-      price: ""
+      price: "",
+      search:""
     };
     },
     components: {
@@ -139,7 +184,7 @@ import {
           this.products = json;
         })
 
-      fetch("https://eccomerce-backend.herokuapp.com/products" + this.id, {
+      fetch("https://eccomerce-backend.herokuapp.com/products/" + this.id, {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -150,6 +195,13 @@ import {
           this.products = json;
         })
     },
+    computed: {
+    filterProducts: function () {
+      return this.products.filter((product) => {;
+        return product.title.match(this.search)
+      });
+    },
+  },
   };
 
 </script>

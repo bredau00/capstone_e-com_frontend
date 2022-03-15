@@ -1,14 +1,14 @@
 <template>
       
-<div class="container border">
+<div class="container border mt-5 pt-4">
   <h2>Login</h2>
-  <form>
+  <form @submit.prevent="login">
     <!-- Email input -->
     <MDBInput
       type="email"
       label="Email address"
       id="form2Email"
-      v-model="form2Email"
+      v-model="email"
       wrapperClass="mb-4"
     />
     <!-- Password input -->
@@ -16,27 +16,11 @@
       type="password"
       label="Password"
       id="form2Password"
-      v-model="form2Password"
+      v-model="password"
       wrapperClass="mb-4"
     />
-    <!-- 2 column grid layout for inline styling -->
-    <MDBRow class="mb-4">
-      <MDBCol class="d-flex justify-content-center">
-        <!-- Checkbox -->
-        <MDBCheckbox
-          label="Remember me"
-          id="form2LoginCheck"
-          v-model="form2LoginCheck"
-          wrapperClass="mb-3 mb-md-0"
-        />
-      </MDBCol>
-      <MDBCol>
-        <!-- Simple link -->
-        <a href="#!">Forgot password?</a>
-      </MDBCol>
-    </MDBRow>
     <!-- Submit button -->
-    <MDBBtn color="primary" block> Sign in </MDBBtn>
+    <MDBBtn type="submit" color="primary" block> Sign in </MDBBtn>
 
     <!-- Register buttons -->
     <div class="text-center">
@@ -56,7 +40,16 @@
     MDBIcon
   } from "mdb-vue-ui-kit";
   import { ref } from "vue";
+  import axios from 'axios'
+  import { loginUser } from '../utils/auth'
   export default {
+    name: 'login',
+        data() {
+            return {
+                email: '',
+                password: ''
+            }
+        },
     components: {
       MDBRow,
       MDBCol,
@@ -76,6 +69,30 @@
         form2LoginCheck,
       };
     },
+    methods: {
+    login() {
+      fetch("https://eccomerce-backend.herokuapp.com/users", {
+        method: "PATCH",
+        body: JSON.stringify({
+          email: this.email,
+          password: this.password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          localStorage.setItem("jwt", json.jwt);
+          alert("User logged in");
+          this.$router.push({ name: "Home" });
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    },
+  },
+
   };
 </script>
 

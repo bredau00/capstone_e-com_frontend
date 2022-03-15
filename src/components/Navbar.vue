@@ -20,7 +20,7 @@
       
       <!-- Search form -->
       <MDBNavbarNav class="mb-2 mb-lg-0">
-        <MDBNavbarItem router-link :to="{name: 'Login'}">
+        <MDBNavbarItem router-link :to="{name: 'Cart'}">
           Cart
         </MDBNavbarItem>
       </MDBNavbarNav>
