@@ -1,8 +1,8 @@
 <template>
   <div class="container mt-5 pt-4">
       <div class="row">
-          <h2>Contact Me</h2>
-          <div class="col-6">
+          <h2>Contact Us</h2>
+          <div class="col-6 border pt-5 pb-4">
             <form>
               <!-- Name input -->
               <MDBInput
@@ -51,7 +51,6 @@
 <script>
 import {
     MDBInput,
-    MDBCheckbox,
     MDBBtn,
     MDBTextarea
   } from "mdb-vue-ui-kit";
@@ -59,7 +58,6 @@ import {
   export default {
     components: {
       MDBInput,
-      MDBCheckbox,
       MDBBtn,
       MDBTextarea
     },

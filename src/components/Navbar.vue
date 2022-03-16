@@ -1,6 +1,11 @@
 <template>
     <MDBNavbar expand="lg" light bg="light" container>
-    <MDBNavbarBrand href="#">The Modern Junkie</MDBNavbarBrand>
+      <MDBNavbarBrand 
+      data-hover="themodernman" 
+      class="text" 
+      href="#">
+        現代人
+      </MDBNavbarBrand>
     <MDBNavbarToggler
       @click="collapse1 = !collapse1"
       target="#navbarSupportedContent"
@@ -12,6 +17,9 @@
         </MDBNavbarItem>
         <MDBNavbarItem router-link :to="{name: 'About'}">
           About
+        </MDBNavbarItem>
+        <MDBNavbarItem router-link :to="{name: 'Products'}">
+          All Products
         </MDBNavbarItem>
         <MDBNavbarItem router-link :to="{name: 'Contact'}">
           Contact
@@ -78,7 +86,16 @@
 </script>
 
 <style>
-  template {
-    font-family: Arial,Helvetica,sans-serif!important;
-  }
+template {
+  font-family: Arial,Helvetica,sans-serif!important;
+}
+
+.text:hover{
+    font-size: 0%;
+    }
+
+.text:hover:after{
+  content: attr(data-hover);
+  font-size: 20px;
+    }
 </style>
