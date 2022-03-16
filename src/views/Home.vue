@@ -36,7 +36,6 @@
                   color="primary"
                   aria-controls="exampleModal"
                   @click="exampleModal=true"
-                  v-on="varB"
                 >
                   View Product
                 </MDBBtn>
@@ -46,8 +45,8 @@
         </div>
         
         </div>
-                <div class="row pt-5">
-                  <h2>bottoms</h2>
+        <div class="row pt-5">
+          <h2>bottoms</h2>
           <div v-for="(product, index) in filterProducts" :key="index" class="col">
             <!-- Project Card -->
             <MDBCard  style="max-width: 255px">
@@ -66,7 +65,6 @@
                   color="primary"
                   aria-controls="exampleModal"
                   @click="exampleModal=true"
-                  v-on="varB"
                 >
                   View Product
                 </MDBBtn>
