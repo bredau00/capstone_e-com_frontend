@@ -1,15 +1,15 @@
 <template>
   <div class="container mt-5 pt-4">
       <div class="row">
-          <h2>Contact Us</h2>
-          <div class="col-6 border pt-5 pb-4">
-            <form>
+          <h2 class="pb-5">Contact Us</h2>
+          <div class="col border rounded-3 pt-5 pb-4">
+            <form @submit.prevent="handleSubmit()">
               <!-- Name input -->
               <MDBInput
                 type="text"
                 label="Name"
                 id="form4Name"
-                v-model="form4Name"
+                v-model="name"
                 wrapperClass="mb-4"
               />
 
@@ -18,7 +18,7 @@
                 type="email"
                 label="Email address"
                 id="form4Email"
-                v-model="form4Email"
+                v-model="email"
                 wrapperClass="mb-4"
               />
 
@@ -26,24 +26,19 @@
               <MDBTextarea
                 label="Message"
                 id="form4Textarea"
-                v-model="form4Textarea"
+                v-model="message"
                 wrapperClass="mb-4"
               />
 
-              <!-- Checkbox -->
-              <div class="form-check d-flex justify-content-center mb-4">
-                <MDBCheckbox
-                  label="Send me a copy of this message"
-                  id="form4CopyCheck"
-                  v-model="form4CopyCheck"
-                />
-              </div>
-
               <!-- Submit button -->
-              <MDBBtn color="primary" block class="mb-4"> Send </MDBBtn>
+              <a>
+                <MDBBtn color="primary" :to="{ name: 'Contact' }" type="submit" block class="mb-4"> Send </MDBBtn>
+                <MDBBtn color="primary" type="reset" block class="mb-4"> reset </MDBBtn>
+              </a>
+              
             </form>
           </div>
-          <div class="col-6">hello</div>
+          <div class="col">hello</div>
       </div>
   </div>
 </template>
@@ -61,21 +56,46 @@ import {
       MDBBtn,
       MDBTextarea
     },
+    data() {
+    return {
+      name: "",
+      email: "",
+      message: "",
+    };
+    },
     setup() {
-      const form4Name = ref("");
-      const form4Email = ref("");
-      const form4Password = ref("");
-      const form4Textarea = ref("");
-      const form4CopyCheck = ref(true);
+      const name = ref("");
+      const email = ref("");
+      const message = ref("");
+
 
       return {
-        form4Name,
-        form4Email,
-        form4Password,
-        form4Textarea,
-        form4CopyCheck
+        name,
+        email,
+        message,
       };
     },
+    methods: {
+    handleSubmit() {
+      fetch("https://eccomerce-backend.herokuapp.com/contact", {
+        method: "POST",
+        body: JSON.stringify({
+          name: this.name,
+          email: this.email,
+          message: this.message,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          (this.contact = data),
+          alert("message sent");
+          })
+        .catch((err) => console.log(err.message));
+    },
+  },
   };
 </script>
 

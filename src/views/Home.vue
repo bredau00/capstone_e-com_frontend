@@ -20,7 +20,7 @@
           <h2>tops</h2>
           <div v-for="(product, index) in filterProducts" :key="index" class="col">
             <!-- Project Card -->
-            <MDBCard  style="max-width: 255px">
+            <MDBCard  style="max-width: 300px">
               <a v-mdb-ripple="{ color: 'light' }" class="card">
                 <MDBCardImg :src="product.img_front" :alt="product.title" />
                 <MDBCardImg :src="product.img_back" class="img-top" :alt="product.title"/>
@@ -49,7 +49,7 @@
           <h2>bottoms</h2>
           <div v-for="(product, index) in filterProducts" :key="index" class="col">
             <!-- Project Card -->
-            <MDBCard  style="max-width: 255px">
+            <MDBCard  style="max-width: 300px">
               <a v-mdb-ripple="{ color: 'light' }" class="card">
                 <MDBCardImg :src="product.img_front" :alt="product.title" />
                 <MDBCardImg :src="product.img_back" class="img-top" :alt="product.title" />
@@ -65,6 +65,7 @@
                   color="primary"
                   aria-controls="exampleModal"
                   @click="exampleModal=true"
+                  
                 >
                   View Product
                 </MDBBtn>
@@ -91,7 +92,6 @@
 
 <!-- Single project modal -->
   <MDBModal
-    @="getOne()"
     id="exampleModal"
     tabindex="-1"
     labelledby="exampleModalLabel"
@@ -99,7 +99,7 @@
     size="xl"
   >
     <MDBModalHeader>
-      <MDBModalTitle id="exampleModalLabel"> Modal title </MDBModalTitle>
+      <MDBModalTitle id="exampleModalLabel"> </MDBModalTitle>
     </MDBModalHeader>
     <MDBModalBody>
       <MDBCard class="mb-3">
@@ -245,7 +245,6 @@ import {
           this.products = json;
         })
       },
-
 
     },
     computed: {

@@ -1,7 +1,7 @@
 <template>
     <MDBNavbar expand="lg" light bg="light" container>
       <MDBNavbarBrand 
-      data-hover="themodernman" 
+      data-hover="TheModernMan" 
       class="text" 
       href="#">
         現代人

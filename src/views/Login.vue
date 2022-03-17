@@ -1,7 +1,7 @@
 <template>
       
-<div class="container border mt-5 pt-4">
-  <h2>Login</h2>
+<div class="container border rounded mt-5 pt-4">
+  <h2 class="pb-5">Login</h2>
   <form @submit.prevent="login">
     <!-- Email input -->
     <MDBInput
@@ -20,11 +20,11 @@
       wrapperClass="mb-4"
     />
     <!-- Submit button -->
-    <MDBBtn type="submit" color="primary" block> Sign in </MDBBtn>
+    <MDBBtn type="submit" color="primary" block class="mb-4"> Sign in </MDBBtn>
 
     <!-- Register buttons -->
     <div class="text-center">
-      <p>Not a member? <a href="#!">Register</a></p>
+      <p>Not a member? <a href="./Register">Register</a></p>
     </div>
   </form>
 </div>
@@ -40,8 +40,6 @@
     MDBIcon
   } from "mdb-vue-ui-kit";
   import { ref } from "vue";
-  import axios from 'axios'
-  import { loginUser } from '../utils/auth'
   export default {
     name: 'login',
         data() {
@@ -85,14 +83,13 @@
         .then((json) => {
           localStorage.setItem("jwt", json.jwt);
           alert("User logged in");
-          this.$router.push({ name: "Home" });
+          this.$router.push({ name: "Products" });
         })
         .catch((err) => {
           alert(err);
         });
     },
   },
-
   };
 </script>
 

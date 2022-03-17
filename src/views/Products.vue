@@ -3,6 +3,7 @@
     
     <div class="container mt-5 pt-2 pb-5">
       <div v-if="products.length=4" class="row p-b-5">
+        
         <!-- Search form -->
         <form class="d-flex input-group w-auto">
           <input
@@ -19,7 +20,7 @@
         <h2></h2>
         <div v-for="(product, index) in filterProducts" :key="index" class="col">
             <!-- Project Card -->
-            <MDBCard  style="max-width: 255px">
+            <MDBCard  style="max-width: 300px">
                 <a v-mdb-ripple="{ color: 'light' }" class="card">
                 <MDBCardImg :src="product.img_front" :alt="product.title" />
                 <MDBCardImg :src="product.img_back" class="img-top" :alt="product.title" />
@@ -53,7 +54,6 @@
 
 <!-- Single project modal -->
   <MDBModal
-    @="getOne()"
     id="exampleModal"
     tabindex="-1"
     labelledby="exampleModalLabel"

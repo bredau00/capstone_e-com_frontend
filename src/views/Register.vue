@@ -1,6 +1,6 @@
 <template>
-<div class="container border mt-5 pt-4">
-    <h2>Register</h2>
+<div class="container border rounded mt-5 pt-4">
+    <h2 class="pb-5">Register</h2>
     <form @submit.prevent="register" class="form neu-border">
     <MDBRow class="mb-4">
       <MDBCol>
@@ -13,6 +13,7 @@
         />
       </MDBCol>
     </MDBRow>
+
     <!-- Email input -->
     <MDBInput
       label="Email address"
@@ -21,6 +22,7 @@
       required
       wrapperClass="mb-4"
     />
+
     <!-- Contact -->
     <MDBInput
       label="Contact"
@@ -29,6 +31,7 @@
       required
       wrapperClass="mb-4"
     />
+    
     <!-- Password input -->
     <MDBInput
       label="Password"
@@ -43,7 +46,7 @@
 
     <!-- Register buttons -->
     <div class="text-center">
-      <a href="./login">Already registered</a>
+      <p>Already registerd? <a href="./login">Login</a></p>
     </div>
   </form>
 </div>
