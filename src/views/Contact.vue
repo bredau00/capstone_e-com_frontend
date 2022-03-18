@@ -32,8 +32,8 @@
 
               <!-- Submit button -->
               <a>
-                <MDBBtn color="primary" :to="{ name: 'Contact' }" type="submit" block class="mb-4"> Send </MDBBtn>
-                <MDBBtn color="primary" type="reset" block class="mb-4"> reset </MDBBtn>
+                <MDBBtn color="dark" :to="{ name: 'Contact' }" type="submit" block class="mb-4"> Send </MDBBtn>
+                <MDBBtn color="dark" type="reset" block class="mb-4"> reset </MDBBtn>
               </a>
               
             </form>

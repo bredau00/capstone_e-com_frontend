@@ -1,21 +1,9 @@
 <template>
   <div class="home pb-5">
     
-    <div class="container mt-5 pt-2 pb-5"><h2>Home</h2>
-      <div v-if="products.length=4" class="row p-b-5">
-        <!-- Search form -->
-        <form class="d-flex input-group w-auto">
-          <input
-            type="search"
-            class="form-control"
-            placeholder="search name"
-            aria-label="Search"
-            v-model="search"
-            label="search"
-          />
-        </form>
-
-        <!-- Products -->
+    <div class="container mt-5 pt-2">
+      <div v-if="products.length" class="row">
+        <!-- Products display -->
         <div class="row">
           <h2>tops</h2>
           <div v-for="(product, index) in filterProducts" :key="index" class="col">
@@ -30,10 +18,10 @@
                   <MDBCardText>{{ product.category }}</MDBCardText>
                   <MDBCardText>R{{ product.price }}</MDBCardText>
                 <MDBBtnGroup>
-                <MDBBtn tag="a" href="#!" color="primary">add to cart</MDBBtn>
+                <MDBBtn tag="a" href="#!" color="dark">add to cart</MDBBtn>
                 <!-- Button trigger modal -->
                 <MDBBtn
-                  color="primary"
+                  color="dark"
                   aria-controls="exampleModal"
                   @click="exampleModal=true"
                 >
@@ -42,7 +30,7 @@
                 </MDBBtnGroup>
               </MDBCardBody>
             </MDBCard>
-        </div>
+          </div>
         
         </div>
         <div class="row pt-5">
@@ -59,73 +47,78 @@
                 <MDBCardText>{{ product.category }}</MDBCardText>
                 <MDBCardText>R{{ product.price }}</MDBCardText>
                 <MDBBtnGroup>
-                <MDBBtn tag="a" href="#!" color="primary">add to cart</MDBBtn>
+                <MDBBtn tag="a" href="#!" color="dark">add to cart</MDBBtn>
                 <!-- Button trigger modal -->
                 <MDBBtn
-                  color="primary"
+                  color="dark"
                   aria-controls="exampleModal"
                   @click="exampleModal=true"
-                  
+
                 >
                   View Product
                 </MDBBtn>
+                
+                <!-- Single project modal -->
+                      <MDBModal
+                        id="exampleModal"
+                        tabindex="-1"
+                        labelledby="exampleModalLabel"
+                        v-model="exampleModal"
+                        size="xl"
+                      >
+                        <MDBModalHeader>
+                          <MDBModalTitle id="exampleModalLabel">Single Product view</MDBModalTitle>
+                        </MDBModalHeader>
+                        <MDBModalBody>
+                          <MDBCard class="mb-3">
+                            <MDBRow class="g-0">
+                              <MDBCol md="4"> 
+                                <a class="card">
+                                    <MDBCardImg :src="product.img_front" :alt="product.title" />
+                                    <MDBCardImg :src="product.img_back" class="img-top" :alt="product.title" />
+                                </a>
+                              </MDBCol>
+                              <MDBCol md="8">
+                                <MDBCardBody>
+                                  <MDBCardTitle> {{ product.title }} </MDBCardTitle>
+                                  <MDBCardText>{{ product.category }}</MDBCardText>
+                                  <MDBCardText>R{{ product.price }}</MDBCardText>
+                                </MDBCardBody>
+                              </MDBCol>
+                            </MDBRow>
+                          </MDBCard>
+                        </MDBModalBody>
+                        <MDBModalFooter>
+                          <MDBBtn color="secondary" @click="exampleModal = false">Close</MDBBtn>
+                          <MDBBtn tag="a" href="#!" color="dark">add to cart</MDBBtn>
+                        </MDBModalFooter>
+                      </MDBModal>
+
                 </MDBBtnGroup>
               </MDBCardBody>
             </MDBCard>
           </div>
         </div>
+      </div>
 
-        <div class="row pt-5 pb-5">
+      <div v-else class="hollow-dots-spinner mx-auto" style="width: 200px" :style="spinnerStyle">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+
+  </div>
+    <div class="container pb-5">
+      <div class="row pt-5 pb-5">
           <MDBCarousel
             v-model="carousel8"
             :items="items8"
             fade
             dark
           />
-        </div>
-      </div>
-
-      <div v-else><p>loading...</p></div>
-
     </div>
   </div>
-
-<!-- Single project modal -->
-  <MDBModal
-    id="exampleModal"
-    tabindex="-1"
-    labelledby="exampleModalLabel"
-    v-model="exampleModal"
-    size="xl"
-  >
-    <MDBModalHeader>
-      <MDBModalTitle id="exampleModalLabel"> </MDBModalTitle>
-    </MDBModalHeader>
-    <MDBModalBody>
-      <MDBCard class="mb-3">
-        <MDBRow class="g-0">
-          <MDBCol md="4"> 
-            <MDBCardImg fluid src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.webp" alt="..."/>
-          </MDBCol>
-          <MDBCol md="8">
-            <MDBCardBody>
-              <MDBCardTitle>  </MDBCardTitle>
-              <MDBCardText>
-                
-              </MDBCardText>
-              <MDBCardText>
-                <small class="text-muted"></small>
-              </MDBCardText>
-            </MDBCardBody>
-          </MDBCol>
-        </MDBRow>
-      </MDBCard>
-    </MDBModalBody>
-    <MDBModalFooter>
-      <MDBBtn color="secondary" @click="exampleModal = false">Close</MDBBtn>
-      <MDBBtn color="primary">Save changes</MDBBtn>
-    </MDBModalFooter>
-  </MDBModal>
 
 </template>
 
@@ -165,6 +158,7 @@ import {
       search:""
     };
     },
+    
     components: {
       MDBCard,
       MDBCardBody,
@@ -186,12 +180,14 @@ import {
     directives: {
       mdbRipple
     },
+
     setup() {
       const exampleModal = ref(false);
       return {
         exampleModal,
       };
     },
+
     setup() {
       const items8 = [
         {
@@ -220,6 +216,7 @@ import {
         carousel8
       };
     },
+
     mounted() {
       fetch("https://eccomerce-backend.herokuapp.com/products", {
         method: "GET",
@@ -232,6 +229,7 @@ import {
           this.products = json;
         })
     },
+
     methods: {
       getOne() {
         fetch("https://eccomerce-backend.herokuapp.com/products/" + this.id, {
@@ -245,8 +243,8 @@ import {
           this.products = json;
         })
       },
-
     },
+
     computed: {
     filterProducts: function () {
       return this.products.filter((product) => {;
@@ -258,7 +256,7 @@ import {
 
 </script>
 
-<style>
+<style scoped>
 
 .card {
   justify-content: center;
@@ -266,7 +264,7 @@ import {
 
 .card:hover .img-top {
         display: inline;
-    }
+}
 
 .card .img-top {
         display: none;
@@ -274,5 +272,49 @@ import {
         top: 0;
         left: 0;
         z-index: 99;
+}
+
+/* loading */
+.hollow-dots-spinner, .hollow-dots-spinner * {
+      box-sizing: border-box;
+    }
+
+    .hollow-dots-spinner {
+      height: 15px;
+      width: calc(30px * 3);
+    }
+
+    .hollow-dots-spinner .dot {
+      width: 15px;
+      height: 15px;
+      margin: 0 calc(15px / 2);
+      border: calc(15px / 5) solid black;
+      border-radius: 50%;
+      float: left;
+      transform: scale(0);
+      animation: hollow-dots-spinner-animation 1000ms ease infinite 0ms;
+    }
+
+    .hollow-dots-spinner .dot:nth-child(1) {
+      animation-delay: calc(300ms * 1);
+    }
+
+    .hollow-dots-spinner .dot:nth-child(2) {
+      animation-delay: calc(300ms * 2);
+    }
+
+    .hollow-dots-spinner .dot:nth-child(3) {
+      animation-delay: calc(300ms * 3);
+
+    }
+
+    @keyframes hollow-dots-spinner-animation {
+      50% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
     }
 </style>

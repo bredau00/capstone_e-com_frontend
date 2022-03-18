@@ -1,5 +1,5 @@
 <template>
-    <MDBNavbar expand="lg" light bg="light" container>
+    <MDBNavbar expand="lg" dark bg="dark" position="top" container>
       <MDBNavbarBrand 
       data-hover="TheModernMan" 
       class="text" 

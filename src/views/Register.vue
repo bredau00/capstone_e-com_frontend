@@ -1,5 +1,5 @@
 <template>
-<div class="container border rounded mt-5 pt-4">
+<div class="container border rounded mt-5 pt-5">
     <h2 class="pb-5">Register</h2>
     <form @submit.prevent="register" class="form neu-border">
     <MDBRow class="mb-4">
@@ -42,7 +42,7 @@
     />
 
     <!-- Submit button -->
-    <MDBBtn color="primary" type="submit" block class="mb-4"> Sign up </MDBBtn>
+    <MDBBtn color="dark" type="submit" block class="mb-4"> Sign up </MDBBtn>
 
     <!-- Register buttons -->
     <div class="text-center">

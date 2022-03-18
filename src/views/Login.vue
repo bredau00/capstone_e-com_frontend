@@ -1,6 +1,6 @@
 <template>
       
-<div class="container border rounded mt-5 pt-4">
+<div class="container border rounded mt-5 pt-5">
   <h2 class="pb-5">Login</h2>
   <form @submit.prevent="login">
     <!-- Email input -->
@@ -20,7 +20,7 @@
       wrapperClass="mb-4"
     />
     <!-- Submit button -->
-    <MDBBtn type="submit" color="primary" block class="mb-4"> Sign in </MDBBtn>
+    <MDBBtn type="submit" color="dark" block class="mb-4"> Sign in </MDBBtn>
 
     <!-- Register buttons -->
     <div class="text-center">
