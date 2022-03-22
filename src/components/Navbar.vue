@@ -31,6 +31,9 @@
         <MDBNavbarItem router-link :to="{name: 'Cart'}">
           Cart
         </MDBNavbarItem>
+        <MDBNavbarItem router-link :to="{name: 'Admin'}">
+          Admin
+        </MDBNavbarItem>
       </MDBNavbarNav>
       <MDBNavbarNav class="mb-2 mb-lg-0">
         <MDBNavbarItem router-link :to="{name: 'Login'}">

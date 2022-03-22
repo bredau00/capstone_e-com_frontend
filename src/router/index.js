@@ -6,6 +6,7 @@ import Register from '@/views/Register.vue'
 import Contact from '@/views/Contact.vue'
 import Cart from '@/views/Cart.vue'
 import Products from '@/views/Products.vue'
+import Admin from '@/views/Admin.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/products',
     name: 'Products',
     component: Products
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin
   }
 ]
 
