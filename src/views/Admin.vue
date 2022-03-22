@@ -1,22 +1,12 @@
 <template>
-  <MDBSideNav>
-
-  </MDBSideNav>
+<div id="SideNav" class="pt-5">
+    <h1>This is the side nav</h1>
+    <button>yoyo</button>
+</div>
 </template>
 
 <script>
-import {
-    MDBBtn,
-    MDBSideNav
-  } from 'mdb-vue-ui-kit';
- import { ref } from 'vue';
-  export default {
-    components: {
-      MDBBtn,
-      MDBSideNav
 
-    }
-  }
 </script>
 
 <style>

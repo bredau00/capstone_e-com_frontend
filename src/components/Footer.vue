@@ -3,7 +3,7 @@
     <!-- Copyright -->
     <div class="text-center p-3" style="">
       © 2022 Copyright:
-      <a class="text-light" href="./">UbaidullahBreda</a>
+      <a class="text-light" href="https://ubaidullahb.netlify.app">UbaidullahBreda</a>
     </div>
     <!-- Copyright -->
   </MDBFooter>

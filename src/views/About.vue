@@ -2,7 +2,7 @@
   <div class="container mt-5 pt-2 pb-5">
     <div class="row">
       <div class="col">
-        <img src="../assets/imgs/about_intro.jpeg" alt="" srcset="" class="img-fluid" style="max-width:600px">
+        <img src="../assets/imgs/about_intro.jpeg" alt="About.Img" srcset="" class="img-fluid" style="max-width:600px">
       </div>
       <div class="col">
         <h2>About Us</h2>

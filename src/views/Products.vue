@@ -3,7 +3,9 @@
     <div class="container mt-5 pt-2 pb-5">
       <div v-if="products.length" class="row p-b-5">
         
-        <!-- Search form -->
+       
+            <div class="container d-flex justify-content-end mb-3 mt-5 pt-4"> 
+              <!-- Search form -->
         <form class="d-flex input-group w-auto">
           <input
             type="search"
@@ -14,6 +16,40 @@
             label="search"
           />
         </form>
+      <div class="d-flex w-25 ms-3">
+        <label for="" class="form-label">Sort by category</label>
+        <select
+          class="form-select"
+          name=""
+          id="sortCategory"
+          onchange="sortCategory()"
+        >
+          <option value="All">All</option>
+          <option value="Tops">Tops</option>
+          <option value="Bottoms">Bottoms</option>
+          <option value="Accessories">Accessories</option>
+        </select>
+      </div>
+      <div class="d-flex w-25 ms-3">
+        <label for="" class="form-label">Sort name</label>
+        <select class="form-select" name="" id="sortName" v-on:change="sortName()">
+          <option value="ascending">A-Z</option>
+          <option value="descending">Z-A</option>
+        </select>
+      </div>
+      <div class="d-flex w-25 ms-3">
+        <label for="" class="form-label">Sort price</label>
+        <select
+          class="form-select"
+          name=""
+          id="sortPrice"
+          onchange="sortPrice()"
+        >
+          <option value="ascending">Ascending</option>
+          <option value="descending">Descending</option>
+        </select>
+      </div>
+    </div>
 
         <!-- Products -->
         <h2></h2>
@@ -124,7 +160,7 @@ import {
       description: "",
       img: "",
       price: "",
-      search:""
+      search:"",
     };
     },
     components: {
@@ -167,6 +203,7 @@ import {
         })
     },
     methods: {
+      // Single View
       getOne() {
         fetch("https://eccomerce-backend.herokuapp.com/products/" + this.id, {
         method: "GET",
@@ -180,14 +217,48 @@ import {
         })
       },
 
+      // SORT BY NAME
+      sortName() {
+        let direction = document.querySelector("#sortName").value;
 
+        let sortedProducts = products.sort((a, b) => {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return -1;
+        }
+        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return 1;
+        }
+        return 0;
+        });
+        if (direction == "descending") sortedProducts.reverse();
+      },
+
+      // SORT BY CATEGORY
+      sortCategory() {
+        let category = document.querySelector("#sortCategory").value;
+
+        if (category == "All") {
+        return readProducts(products);
+        }
+  
+        let foundProducts = products.filter((product) => {
+          return product.category == category;
+        });
+
+        readProducts(foundProducts);
+        console.log(foundProducts);
+      }
+
+      
     },
+
     computed: {
     filterProducts: function () {
       return this.products.filter((product) => {;
         return product.title.toLowerCase().match(this.search.toLowerCase())
       });
     },
+
   },
 };
 </script>
