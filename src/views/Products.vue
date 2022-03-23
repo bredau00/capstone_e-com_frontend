@@ -4,7 +4,7 @@
       <div v-if="products.length" class="row p-b-5">
         
        
-            <div class="container d-flex justify-content-end mb-3 mt-5 pt-4"> 
+      <div class="container d-flex justify-content-end mb-3 mt-5 pt-4"> 
               <!-- Search form -->
         <form class="d-flex input-group w-auto">
           <input
@@ -20,33 +20,32 @@
         <label for="" class="form-label">Sort by category</label>
         <select
           class="form-select"
-          name=""
-          id="sortCategory"
-          onchange="sortCategory()"
+          v-model="category"
+          v-on:change="sortCategory(category)"
         >
-          <option value="All">All</option>
+          <option value="">All</option>
           <option value="Tops">Tops</option>
           <option value="Bottoms">Bottoms</option>
           <option value="Accessories">Accessories</option>
         </select>
       </div>
       <div class="d-flex w-25 ms-3">
-        <label for="" class="form-label">Sort name</label>
-        <select class="form-select" name="" id="sortName" v-on:change="sortName()">
-          <option value="ascending">A-Z</option>
-          <option value="descending">Z-A</option>
+        <label class="form-label">Sort name</label>
+        <select class="form-select" v-model="title" v-on:change="sortTitle(title)">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
         </select>
       </div>
       <div class="d-flex w-25 ms-3">
         <label for="" class="form-label">Sort price</label>
         <select
           class="form-select"
-          name=""
-          id="sortPrice"
-          onchange="sortPrice()"
+          v-model="price"
+          v-on:change="sortPrice(price)"
         >
-          <option value="ascending">Ascending</option>
-          <option value="descending">Descending</option>
+          <option value=""></option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
         </select>
       </div>
     </div>
@@ -147,14 +146,16 @@ import {
   MDBCol,
   MDBInput,
   MDBBtnGroup,
-  } from "mdb-vue-ui-kit";
+} from "mdb-vue-ui-kit";
   import { ref } from 'vue';
 
   export default {
     props: ["id"],
     data() {
     return {
+      product: null,
       products: [],
+      filterProducts: null,
       title: "",
       category: "",
       description: "",
@@ -200,6 +201,7 @@ import {
         .then((response) => response.json())
         .then((json) => {
           this.products = json;
+          this.filterProducts = json.results;
         })
     },
     methods: {
@@ -217,39 +219,38 @@ import {
         })
       },
 
-      // SORT BY NAME
-      sortName() {
-        let direction = document.querySelector("#sortName").value;
-
-        let sortedProducts = products.sort((a, b) => {
-        if (a.title.toLowerCase() < b.title.toLowerCase()) {
-        return -1;
-        }
-        if (a.title.toLowerCase() > b.title.toLowerCase()) {
-        return 1;
-        }
-        return 0;
-        });
-        if (direction == "descending") sortedProducts.reverse();
+      // SORT BY PRICE
+      sortPrice(price) {
+      this.products = this.products.sort(
+        (a, b) => a.price - b.price
+      );
+      if (price == "desc") this.products.reverse();
       },
 
-      // SORT BY CATEGORY
-      sortCategory() {
-        let category = document.querySelector("#sortCategory").value;
-
-        if (category == "All") {
-        return readProducts(products);
+      // SORT BY NAME
+      sortTitle(desc) {
+      this.products = this.products.sort((a, b) => {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+          return -1;
         }
-  
-        let foundProducts = products.filter((product) => {
-          return product.category == category;
-        });
-
-        readProducts(foundProducts);
-        console.log(foundProducts);
-      }
-
+        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      });
+      if (desc == "desc") this.products.reverse();
+      },
       
+      // FILLTER CATEGORY
+      filterCategory(category) {
+      if (category) {
+        this.filterProducts = this.products.filter(
+          (product) => product.category == category
+        );
+      } else {
+        this.fillterProducts = this.products;
+      }
+    },
     },
 
     computed: {
@@ -258,9 +259,8 @@ import {
         return product.title.toLowerCase().match(this.search.toLowerCase())
       });
     },
-
   },
-};
+  };
 </script>
 
 <style>
