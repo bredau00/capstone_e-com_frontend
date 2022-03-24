@@ -8,50 +8,53 @@
     size="lg">
       addproduct
     </MDBBtn>
-    <div class="container d-flex justify-content-end mt-5 pt-4"> 
-              <!-- Search form -->
-        <form class="d-flex input-group w-auto">
-          <input
-            type="search"
-            class="form-control"
-            placeholder="search name"
-            aria-label="Search"
-            v-model="search"
-            label="search"
-          />
-        </form>
-      <div class="d-flex w-25 ms-3">
-        <label for="" class="form-label">Sort by category</label>
-        <select
-          class="form-select"
-          v-model="category"
-          v-on:change="sortCategory(category)"
-        >
-          <option value="">All</option>
-          <option value="Tops">Tops</option>
-          <option value="Bottoms">Bottoms</option>
-          <option value="Accessories">Accessories</option>
-        </select>
-      </div>
-      <div class="d-flex w-25 ms-3">
-        <label class="form-label">Sort name</label>
-        <select class="form-select" v-model="title" v-on:change="sortTitle(title)">
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
-      </div>
-      <div class="d-flex w-25 ms-3">
-        <label for="" class="form-label">Sort price</label>
-        <select
-          class="form-select"
-          v-model="price"
-          v-on:change="sortPrice(price)"
-        >
-          <option value=""></option>
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
-      </div>
+      <div class="container d-flex justify-content-end mt-5 pt-4"> 
+        <!-- Search form -->
+          <form class="d-flex input-group w-auto">
+            <input
+              type="search"
+              class="form-control"
+              placeholder="search name"
+              aria-label="Search"
+              v-model="search"
+              label="search"
+            />
+          </form>
+        <div class="d-flex w-25 ms-3">
+          <label for="" class="form-label">Sort by category</label>
+          <select
+            class="form-select"
+            v-model="category"
+            v-on:change="sortCategory(category)"
+          >
+            <option value="">All</option>
+            <option value="Tops">Tops</option>
+            <option value="Bottoms">Bottoms</option>
+            <option value="Accessories">Accessories</option>
+          </select>
+        </div>
+        <div class="d-flex w-25 ms-3">
+          <label class="form-label">Sort name</label>
+          <select 
+          class="form-select" 
+          v-model="title" 
+          v-on:change="sortTitle(title)">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </div>
+        <div class="d-flex w-25 ms-3">
+          <label for="" class="form-label">Sort price</label>
+          <select
+            class="form-select"
+            v-model="price"
+            v-on:change="sortPrice(price)"
+          >
+            <option value=""></option>
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </div>
     </div>
     <div v-if="products.length" id="products" class="row pt-5">
       <div v-for="(product, index) in products" :key="index" class="col-6">
@@ -204,14 +207,13 @@ import {
       filterProducts: null,
       title: "",
       category: "",
-      description: "",
-      img: "",
+      img_front: "",
+      img_back: "",
       price: "",
-      search:"",
-      name:"",
-      email:"",
-      password:"",
-      search:"",
+      search: "",
+      name: "",
+      email: "",
+      password: "",
     };
     },
     components: {
@@ -232,7 +234,7 @@ import {
     },
 
     mounted() {
-      fetch("https://eccomerce-backend.herokuapp.com/products", {
+      fetch("https://eccomerce-backend.herokuapp.com/products/", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -265,33 +267,27 @@ import {
       };
     },
     methods: {
-    createProduct() {
-      if (!localStorage.getItem("jwt")) {
-        alert("User not logged in");
-        return this.$router.push({ name: "Login" });
-      }
-      fetch("https://eccomerce-backend.herokuapp.com/products", {
-        method: "POST",
-        body: JSON.stringify({
-          title: this.title,
-          category: this.category,
-          img_front: this.img_front,
-          img_back: this.img_back,
-          price: this.price,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          alert("Product Created Successfuly");
+      createProduct() {
+        fetch("https://eccomerce-backend.herokuapp.com/products" , {
+          method: "POST",
+          body: JSON.stringify({
+            title: this.title,
+            category: this.category,
+            img_front: this.img_front,
+            img_back: this.img_back,
+            price: this.price,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
         })
-        .catch((err) => {
-          alert(err);
-        });
+          .then((response) => response.json())
+          .then((json) => {
+            alert("Product Created");
+            
+          });
     },
+
      // SORT BY PRICE
       sortPrice(price) {
       this.products = this.products.sort(

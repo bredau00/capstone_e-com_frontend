@@ -30,9 +30,6 @@
         <MDBNavbarItem router-link :to="{name: 'Cart'}">
           Cart
         </MDBNavbarItem>
-        <MDBNavbarItem router-link :to="{name: 'Admin'}">
-          Admin
-        </MDBNavbarItem>
       </MDBNavbarNav>
       
       <MDBNavbarNav class="mb-2 mb-lg-0">
@@ -42,8 +39,10 @@
         <MDBNavbarItem router-link :to="{name: 'Register'}">
           Register
         </MDBNavbarItem>
+        <MDBNavbarItem router-link :to="{name: 'Home'}" @click="logOut()">
+          Logout
+        </MDBNavbarItem>
       </MDBNavbarNav>
-      
     </MDBCollapse>
   </MDBNavbar>
 </template>
@@ -64,6 +63,12 @@
   } from 'mdb-vue-ui-kit';
   import { ref } from 'vue';
   export default {
+    data(){
+    return{
+     loggedin: false,
+     isAdmin:false
+    }
+  },
     components: {
       MDBBtn,
       MDBNavbar,
@@ -84,15 +89,18 @@
         collapse1,
         dropdown1
       }
+    },
+    methods:{
+      logOut() {
+      localStorage.removeItem("jwt");
+      this.$router.push({ name: "Home" });
+    },
     }
   };
+  
 </script>
 
 <style>
-template {
-  font-family: Arial,Helvetica,sans-serif!important;
-}
-
 .text:hover{
     font-size: 0%;
     }

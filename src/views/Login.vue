@@ -81,7 +81,7 @@
       })
         .then((response) => response.json())
         .then((json) => {
-          localStorage.setItem("jwt", json.jwt);
+          localStorage.setItem("jwt", json);
           alert("User logged in");
           this.$router.push({ name: "Products" });
         })
@@ -89,6 +89,7 @@
           alert(err);
         });
     },
+    
   },
   };
 </script>

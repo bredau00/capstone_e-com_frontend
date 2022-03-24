@@ -38,7 +38,25 @@
               
             </form>
           </div>
-          <div class="col">hello</div>
+          <div class="col-6">
+            <MDBRow>
+              <MDBCol col="12" sm="3">
+                <i class="fas fa-phone"></i>
+              Phone:
+              <p class="text-muted">+27 67 839 8557</p>
+              </MDBCol>
+              <MDBCol col="12" sm="3">
+                <i class="fas fa-phone"></i>
+              Phone:
+              <p class="text-muted">+27 67 839 8557</p>
+              </MDBCol>
+              <MDBCol col="12" sm="3">
+                <i class="fas fa-phone"></i>
+              Phone:
+              <p class="text-muted">+27 67 839 8557</p>
+              </MDBCol>
+            </MDBRow>
+          </div>
       </div>
   </div>
 </template>

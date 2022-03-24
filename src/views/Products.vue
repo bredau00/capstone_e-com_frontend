@@ -2,8 +2,6 @@
 <div class="pb-5">
     <div class="container mt-5 pt-2 pb-5">
       <div v-if="products.length" class="row p-b-5">
-        
-       
       <div class="container d-flex justify-content-end mb-3 mt-5 pt-4"> 
               <!-- Search form -->
         <form class="d-flex input-group w-auto">
@@ -323,4 +321,15 @@ import {
         opacity: 0;
       }
     }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge add Firefox */
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}
 </style>
