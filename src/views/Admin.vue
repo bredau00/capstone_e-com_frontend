@@ -476,7 +476,7 @@ import {
         };
         let apiURL = `https://eccomerce-backend.herokuapp.com/products//${id}`;
 
-        let indexOfArrayItem = this.products.findIndex((i) => i.title === id);
+        let indexOfArrayItem = this.products.findIndex((i) => i.id === id);
 
         if (window.confirm("Do you really want to delete?")) {
           axios
