@@ -1,12 +1,13 @@
 <template>
-  <div class="container pt-5">
+<!-- Product CARDS -->
+  <div id="products" class="container pt-5 pb-4 border-bottom border-dark">
     <h3 class="pt-5">Products</h3>
     <MDBBtn 
     color="dark" 
     aria-controls="exampleModal"
     @click="exampleModal=true" 
     size="lg">
-      addproduct
+      add product
     </MDBBtn>
       <div class="container d-flex justify-content-end mt-5 pt-4"> 
         <!-- Search form -->
@@ -39,8 +40,8 @@
           class="form-select" 
           v-model="title" 
           v-on:change="sortTitle(title)">
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
+            <option value="asc">A-Z</option>
+            <option value="desc">Z-A</option>
           </select>
         </div>
         <div class="d-flex w-25 ms-3">
@@ -51,13 +52,13 @@
             v-on:change="sortPrice(price)"
           >
             <option value=""></option>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
+            <option value="asc">Lowest-Highest</option>
+            <option value="desc">Highest-Lowest</option>
           </select>
         </div>
     </div>
     <div v-if="products.length" id="products" class="row pt-5">
-      <div v-for="(product, index) in products" :key="index" class="col-6">
+      <div v-for="(product, index) in products" :key="index" class="col-6 mt-2 mb-2">
         <MDBCard class="" style="max-height: 300px" >
           <MDBCardBody>
             <MDBRow class="g-0">
@@ -74,8 +75,19 @@
                 </MDBRow>
                 <MDBRow>
                   <MDBCol>
-                    <MDBBtn color="dark">edit</MDBBtn>
-                    <MDBBtn color="dark">delete</MDBBtn>
+                    <MDBBtn
+                    @click="exampleModal2=true" 
+                    aria-controls="exampleModal2"
+                    color="dark"
+                    >
+                      edit
+                    </MDBBtn>
+                    <MDBBtn 
+                    @click="deleteProduct(id)"
+                    color="dark"
+                    >
+                      delete
+                    </MDBBtn>
                   </MDBCol>
                 </MDBRow>
               </MDBCol>
@@ -91,28 +103,98 @@
     </div>
   </div>
 
-  <div class="container pt-5 pb-5">
-    <h3 class="pt-5">users</h3>
-    <div v-if="users.length" id="users" class="row pt-5 pb-5">
-      
-        <MDBCard v-for="(user, index) in users" :key="index" class="w-100 pt-5 col">
+<!-- USER CARDS -->
+  <div id="users" class="container pb-5 pt-3 border-bottom">
+    <h3 class="pt-5">Users</h3>
+    <MDBBtn 
+    color="dark"  
+    size="lg">
+      add user
+    </MDBBtn>
+    <div class="container d-flex justify-content-end mt-5 pt-4"> 
+        <!-- Search form -->
+          <form class="d-flex input-group w-auto"> 
+            <input
+              type="search"
+              class="form-control"
+              placeholder="search name"
+              aria-label="Search"
+              v-model="search"
+              label="search"
+            />
+          </form>
+        <div class="d-flex w-25 ms-3">
+          <label for="" class="form-label">Sort by category</label>
+          <select
+            class="form-select"
+            v-model="category"
+            v-on:change="sortCategory(category)"
+          >
+            <option value="">All</option>
+            <option value="Tops">Tops</option>
+            <option value="Bottoms">Bottoms</option>
+            <option value="Accessories">Accessories</option>
+          </select>
+        </div>
+        <div class="d-flex w-25 ms-3">
+          <label class="form-label">Sort name</label>
+          <select
+          class="form-select" 
+          v-model="title" 
+          v-on:change="sortTitle(title)">
+            <option value="asc">A-Z</option>
+            <option value="desc">Z-A</option>
+          </select>
+        </div>
+        <div class="d-flex w-25 ms-3">
+          <label for="" class="form-label">Sort price</label>
+          <select
+            class="form-select"
+            v-model="price"
+            v-on:change="sortPrice(price)"
+          >
+            <option value=""></option>
+            <option value="asc">Lowest-Highest</option>
+            <option value="desc">Highest-Lowest</option>
+          </select>
+        </div>
+    </div>
+    <div v-if="users.length" id="users" class="row pt-5 pb-5 justify-content-between">
+        <MDBCard v-for="(user, index) in users" :key="index" class=" pt-5 m-3 col-3">
           <MDBCardBody>
             <MDBCardTitle>{{ user.name }}</MDBCardTitle>
             <MDBCardText>
               {{ user.email }}
+            </MDBCardText>
+            <MDBCardText>
               {{ user.contact }}
             </MDBCardText>
-            <MDBBtn tag="a" href="#!" color="dark">Button</MDBBtn>
+            <MDBBtn
+            @click="exampleModal3=true" 
+            aria-controls="exampleModal3"
+            color="dark"
+            >
+              edit
+            </MDBBtn>
+            <MDBBtn
+            color="dark"
+            >
+              delete
+            </MDBBtn>
           </MDBCardBody>
         </MDBCard>
     </div>
-    <div v-else class="hollow-dots-spinner mx-auto " style="width: 200px" :style="spinnerStyle">
+    <div v-else class="hollow-dots-spinner mx-auto" style="width: 200px" :style="spinnerStyle">
       <div class="dot"></div>
       <div class="dot"></div>
       <div class="dot"></div>
     </div>
   </div>
 
+
+<!-- MODALS -->
+
+<!-- Add product modal -->
   <MDBModal
     id="exampleModal"
     tabindex="-1"
@@ -127,23 +209,22 @@
         <!-- Name input -->
         <MDBInput
           type="text"
-          label="Name of Product"
+          label="title"
           id="title"
           v-model="title"
           wrapperClass="mb-4"
         />
   
         <!-- category input -->
-          <select
+        <select
             class="form-select"
-            wrapperClass="mb-4"
             v-model="category"
+            wrapperClass="mb-4"
           >
             <option value="Tops">Tops</option>
             <option value="Bottoms">Bottoms</option>
             <option value="Accessories">Accessories</option>
-          </select>
-          <br>
+        </select>
 
         <!-- img front input -->
         <MDBInput
@@ -176,9 +257,93 @@
       <MDBBtn color="dark" @click="exampleModal = false">Close</MDBBtn>
     </MDBModalFooter>
   </MDBModal>
+
+  <!-- Edit product modal -->
+  <MDBModal
+    id="exampleModal2"
+    tabindex="-1"
+    labelledby="exampleModalLabel2"
+    v-model="exampleModal2"
+  >
+    <MDBModalHeader>
+      <MDBModalTitle id="exampleModalLabel2"> Edit Product </MDBModalTitle>
+    </MDBModalHeader>
+    <MDBModalBody>
+      <form>
+        <!-- Name input -->
+        <MDBInput
+          type="text"
+          label="Name of Product"
+          id="title"
+          v-model="title"
+          wrapperClass="mb-4"
+        />
+  
+        <!-- category input -->
+        <MDBInput
+          type="text"
+          label="category"
+          id="category"
+          v-model="category"
+          wrapperClass="mb-4"
+        />
+
+        <!-- img front input -->
+        <MDBInput
+          type="text"
+          label="img front link"
+          id="img_front"
+          v-model="img_front"
+          wrapperClass="mb-4"
+        />
+        <!-- img back input -->
+        <MDBInput
+          type="text"
+          label="img back link"
+          id="img_back"
+          v-model="img_back"
+          wrapperClass="mb-4"
+        />
+        <!-- price input -->
+        <MDBInput
+          type="text"
+          label="price"
+          id="price"
+          v-model="price"
+          wrapperClass="mb-4"
+        />
+        <MDBBtn color="dark" class="form-btn neu-border">add</MDBBtn>
+      </form>
+    </MDBModalBody>
+    <MDBModalFooter>
+      <MDBBtn color="dark" @click="exampleModal2 = false">Close</MDBBtn>
+    </MDBModalFooter>
+  </MDBModal>
+
+  <!-- Edit user modal -->
+  <MDBModal
+    id="exampleModal3"
+    tabindex="-1"
+    labelledby="exampleModalLabel3"
+    v-model="exampleModal3"
+  >
+    <MDBModalHeader>
+      <MDBModalTitle id="exampleModalLabel2"> Edit User </MDBModalTitle>
+    </MDBModalHeader>
+    <MDBModalBody>
+      <form>
+        
+        <MDBBtn color="dark" class="form-btn neu-border">add</MDBBtn>
+      </form>
+    </MDBModalBody>
+    <MDBModalFooter>
+      <MDBBtn color="dark" @click="exampleModal3 = false">Close</MDBBtn>
+    </MDBModalFooter>
+  </MDBModal>
 </template>
 
 <script>
+import axios from "axios";
 import { 
   MDBCard, 
   MDBRow,
@@ -214,6 +379,7 @@ import {
       name: "",
       email: "",
       password: "",
+      id:"",
     };
     },
     components: {
@@ -259,34 +425,70 @@ import {
       const form8Name = ref("");
       const form8Email = ref("");
       const exampleModal = ref(false);
+      const exampleModal2 = ref(false);
+      const exampleModal3 = ref(false);
 
       return {
         exampleModal,
+        exampleModal2,
+        exampleModal3,
         form8Name,
         form8Email
       };
     },
     methods: {
-      createProduct() {
-        fetch("https://eccomerce-backend.herokuapp.com/products" , {
-          method: "POST",
-          body: JSON.stringify({
-            title: this.title,
-            category: this.category,
-            img_front: this.img_front,
-            img_back: this.img_back,
-            price: this.price,
-          }),
+      // Create Product
+    createProduct() {
+      if (!localStorage.getItem("jwt")) {
+        alert("User not logged in");
+        return this.$router.push({ name: "Login" });
+      }
+      fetch("https://eccomerce-backend.herokuapp.com/products/", {
+        method: "POST",
+        body: JSON.stringify({
+          title: this.title,
+          category: this.category,
+          price: this.price,
+          img_front: this.img_front,
+          img_back: this.img_back,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          alert("Product Created");
+          this.$router.push({ name: "Admin" });
+        })
+        .catch((err) => {
+          alert(err);
+        });
+      },
+
+      deleteProduct(id) {
+        const config = {
           headers: {
             "Content-type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
-        })
-          .then((response) => response.json())
-          .then((json) => {
-            alert("Product Created");
-            
-          });
-    },
+        };
+        let apiURL = `https://eccomerce-backend.herokuapp.com/products//${id}`;
+
+        let indexOfArrayItem = this.products.findIndex((i) => i.title === id);
+
+        if (window.confirm("Do you really want to delete?")) {
+          axios
+            .delete(apiURL, config)
+            .then(() => {
+              this.products.splice(indexOfArrayItem, 1);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      },
 
      // SORT BY PRICE
       sortPrice(price) {

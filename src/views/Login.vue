@@ -2,7 +2,7 @@
       
 <div class="container border rounded mt-5 pt-5">
   <h2 class="pb-5">Login</h2>
-  <form @submit.prevent="login">
+  <form @submit.prevent="login()">
     <!-- Email input -->
     <MDBInput
       type="email"
@@ -81,7 +81,7 @@
       })
         .then((response) => response.json())
         .then((json) => {
-          localStorage.setItem("jwt", json);
+          localStorage.setItem("jwt", json.jwt);
           alert("User logged in");
           this.$router.push({ name: "Products" });
         })

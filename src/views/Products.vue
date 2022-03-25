@@ -50,9 +50,9 @@
 
         <!-- Products -->
         <h2></h2>
-        <div v-for="(product, index) in filterProducts" :key="index" class="col">
+        <div v-for="(product, index) in filterProducts" :key="index" class="col-3 mt-2 mb-2">
             <!-- Project Card -->
-            <MDBCard  style="max-width: 300px">
+            <MDBCard  class="">
                 <a v-mdb-ripple="{ color: 'light' }" class="card">
                 <MDBCardImg :src="product.img_front" :alt="product.title" />
                 <MDBCardImg :src="product.img_back" class="img-top" :alt="product.title" />

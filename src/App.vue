@@ -23,7 +23,7 @@ export default {
 
 <style>
 #app {
-  font-family: -apple-system,BlinkMacSystemFont,San Francisco,Helvetica Neue,Helvetica,Ubuntu,Roboto,Noto,Segoe UI,Arial,sans-serif;;
+  font-family: "Lucida Console", "Courier New", monospace;;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

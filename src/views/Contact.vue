@@ -38,7 +38,7 @@
               
             </form>
           </div>
-          <div class="col-6">
+          <div class="col-6 m">
             <MDBRow>
               <MDBCol col="12" sm="3">
                 <i class="fas fa-phone"></i>
