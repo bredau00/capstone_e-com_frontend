@@ -48,8 +48,8 @@
               </MDBCol>
               <MDBCol col="12" sm="3">
                 <i class="fas fa-phone"></i>
-              Phone:
-              <p class="text-muted">+27 67 839 8557</p>
+              Email:
+              <p class="text-muted">manmodern88@gmail.com</p>
               </MDBCol>
               <MDBCol col="12" sm="3">
                 <i class="fas fa-phone"></i>

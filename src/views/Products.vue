@@ -68,13 +68,16 @@
                 <!-- <MDBBtn tag="a" href="#!" color="dark">add to cart</MDBBtn> -->
 
                 <!-- Button trigger modal -->
-                    <MDBBtn
-                        color="dark"
-                        aria-controls="exampleModal"
-                        @click="exampleModal=true"  
+                    <router-link
+                      :to="{
+                      name: 'ProductDetails',
+                      params: {
+                      id: product._id ,
+                      },
+                    }"
                     >
-                        View Product
-                    </MDBBtn>
+                    <MDBBtn tag="a" href="#!" color="dark">view</MDBBtn>
+                    </router-link>
                     <!-- Single project modal -->
                       <MDBModal
                         id="exampleModal"

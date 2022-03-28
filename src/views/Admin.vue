@@ -106,13 +106,8 @@
 <!-- USER CARDS -->
   <div id="users" class="container pb-5 pt-3 border-bottom">
     <h3 class="pt-5">Users</h3>
-    <MDBBtn 
-    color="dark"  
-    size="lg">
-      add user
-    </MDBBtn>
     <div class="container d-flex justify-content-end mt-5 pt-4"> 
-        <!-- Search form -->
+        <!-- Search form
           <form class="d-flex input-group w-auto"> 
             <input
               type="search"
@@ -157,7 +152,7 @@
             <option value="asc">Lowest-Highest</option>
             <option value="desc">Highest-Lowest</option>
           </select>
-        </div>
+        </div> -->
     </div>
     <div v-if="users.length" id="users" class="row pt-5 pb-5 justify-content-between">
         <MDBCard v-for="(user, index) in users" :key="index" class=" pt-5 m-3 col-3">
@@ -178,6 +173,7 @@
             </MDBBtn>
             <MDBBtn
             color="dark"
+            @click="deleteUser(id)"
             >
               delete
             </MDBBtn>
@@ -312,7 +308,7 @@
           v-model="price"
           wrapperClass="mb-4"
         />
-        <MDBBtn color="dark" class="form-btn neu-border">add</MDBBtn>
+        <MDBBtn color="dark" class="form-btn neu-border">Add Changes</MDBBtn>
       </form>
     </MDBModalBody>
     <MDBModalFooter>
@@ -483,6 +479,28 @@ import {
             .delete(apiURL, config)
             .then(() => {
               this.products.splice(indexOfArrayItem, 1);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      },
+      deleteUser(id) {
+        const config = {
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        };
+        let apiURL = `https://eccomerce-backend.herokuapp.com/users//${id}`;
+
+        let indexOfArrayItem = this.users.findIndex((i) => i.id === id);
+
+        if (window.confirm("Do you really want to delete?")) {
+          axios
+            .delete(apiURL, config)
+            .then(() => {
+              this.users.splice(indexOfArrayItem, 1);
             })
             .catch((error) => {
               console.log(error);

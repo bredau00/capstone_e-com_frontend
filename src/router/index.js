@@ -7,6 +7,8 @@ import Contact from '@/views/Contact.vue'
 import Cart from '@/views/Cart.vue'
 import Products from '@/views/Products.vue'
 import Admin from '@/views/Admin.vue'
+import ProductDetails from '@/views/ProductDetails.vue'
+
 
 const routes = [
   {
@@ -48,6 +50,11 @@ const routes = [
     path: '/admin',
     name: 'Admin',
     component: Admin
+  },
+  {
+    path: '/:id',
+    name: 'ProductDetails',
+    component: ProductDetails
   }
 ]
 
