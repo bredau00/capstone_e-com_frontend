@@ -65,7 +65,7 @@
                 <!-- buttons -->
                 <MDBBtnGroup>
 
-                <MDBBtn tag="a" href="#!" color="dark">add to cart</MDBBtn>
+                <!-- <MDBBtn tag="a" href="#!" color="dark">add to cart</MDBBtn> -->
 
                 <!-- Button trigger modal -->
                     <MDBBtn

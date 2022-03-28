@@ -1,8 +1,9 @@
 <template>
-  <div class="container mt-5 pt-4">
+<div class="pt-5"></div>
+  <div class="container rounded mt-5 border  pt-4">
       <div class="row">
           <h2 class="pb-5">Contact Us</h2>
-          <div class="col border rounded-3 pt-5 pb-4">
+          <div class="col border ms-2 mb-2 rounded-3 pt-5 pb-4">
             <form @submit.prevent="handleSubmit()">
               <!-- Name input -->
               <MDBInput

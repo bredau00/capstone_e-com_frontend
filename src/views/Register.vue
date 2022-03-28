@@ -1,4 +1,7 @@
 <template>
+<div class="pt-5">
+
+</div>
 <div class="container border rounded mt-5 pt-5">
     <h2 class="pb-5">Register</h2>
     <form @submit.prevent="register" class="form neu-border">
