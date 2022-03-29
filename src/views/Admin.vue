@@ -265,7 +265,7 @@
       <MDBModalTitle id="exampleModalLabel2"> Edit Product </MDBModalTitle>
     </MDBModalHeader>
     <MDBModalBody>
-      <form>
+      <form @submit.prevent="updateProduct">
         <!-- Name input -->
         <MDBInput
           type="text"
@@ -274,16 +274,18 @@
           v-model="title"
           wrapperClass="mb-4"
         />
-  
-        <!-- category input -->
-        <MDBInput
-          type="text"
-          label="category"
-          id="category"
-          v-model="category"
-          wrapperClass="mb-4"
-        />
 
+        <!-- category input -->
+        <select
+            class="form-select"
+            v-model="category"
+            wrapperClass="mb-4"
+          >
+            <option value="Tops">Tops</option>
+            <option value="Bottoms">Bottoms</option>
+            <option value="Accessories">Accessories</option>
+        </select>
+  
         <!-- img front input -->
         <MDBInput
           type="text"
@@ -308,7 +310,7 @@
           v-model="price"
           wrapperClass="mb-4"
         />
-        <MDBBtn color="dark" class="form-btn neu-border">Add Changes</MDBBtn>
+        <MDBBtn color="dark" type="submit" class="form-btn neu-border">Add Changes</MDBBtn>
       </form>
     </MDBModalBody>
     <MDBModalFooter>
@@ -485,6 +487,35 @@ import {
             });
         }
       },
+      updateProduct() {
+      if (!localStorage.getItem("jwt")) {
+        alert("User not logged in");
+        return this.$router.push({ name: "Login" });
+      }
+      fetch("https://capstone-bkend.herokuapp.com/products/" + this.id, {
+        method: "PUT",
+        body: JSON.stringify({
+          title: this.title,
+          category: this.category,
+          price: this.price,
+          img_front: this.img_front,
+          img_back: this.img_back,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.product = json;
+          alert("Product Updated");
+          location.reload();
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    },
       deleteUser(id) {
         const config = {
           headers: {
