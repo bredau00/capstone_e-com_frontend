@@ -1,6 +1,6 @@
 <template>
 <div class="pt-5">
-  <div class="container border rounded mt-5 pt-5">
+  <div class="container border shadow-5-strong rounded mt-5 pt-5">
   <h2 class="pb-5">Login</h2>
   <form @submit.prevent="login()">
     <!-- Email input -->

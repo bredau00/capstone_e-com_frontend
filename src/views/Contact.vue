@@ -1,6 +1,6 @@
 <template>
 <div class="pt-5"></div>
-  <div class="container rounded mt-5 border  pt-4">
+  <div class="container rounded mt-5 border shadow-5-strong pt-4">
       <div class="row">
           <h2 class="pb-5">Contact Us</h2>
           <div class="col border ms-2 mb-2 rounded-3 pt-5 pb-4">
@@ -39,22 +39,17 @@
               
             </form>
           </div>
-          <div class="col-6 m">
+          <div class="col">
             <MDBRow>
-              <MDBCol col="12" sm="3">
+              <MDBCol col="6">
                 <i class="fas fa-phone"></i>
               Phone:
               <p class="text-muted">+27 67 839 8557</p>
               </MDBCol>
-              <MDBCol col="12" sm="3">
-                <i class="fas fa-phone"></i>
+              <MDBCol col="6">
+                <i class="fa-solid fa-at"></i>
               Email:
               <p class="text-muted">manmodern88@gmail.com</p>
-              </MDBCol>
-              <MDBCol col="12" sm="3">
-                <i class="fas fa-phone"></i>
-              Phone:
-              <p class="text-muted">+27 67 839 8557</p>
               </MDBCol>
             </MDBRow>
           </div>

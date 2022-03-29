@@ -2,7 +2,8 @@
 <div class="pt-5">
 
 </div>
-  <h1 class="fw-bold my-5">Product Details</h1>
+<div class="contaner pt-5">
+  <h1>Product Details</h1>
   <MDBBtn
     color="black"
     onclick="history.back(-1)"
@@ -10,15 +11,9 @@
   >
     Go Back
   </MDBBtn>
-  <div class="container animate__animated animate__rubberBand">
+  <div class="container">
     <div v-if="product" class="row d-flex justify-content-center">
       <div class="card-item text-dark border shadow-5-strong mt-5 card">
-        <img :src="product.img_front" class="d-block img-thumbnail" alt="..." />
-        <img
-          :src="product.img_back"
-          class="img-thumbnail img-top card-img"
-          alt="..."
-        />
 
         <div class="text-center">
           <p class="h5 names text-center">{{ product.title }}</p>
@@ -28,34 +23,15 @@
           </div>
         </div>
         <div class="my-2">
-          <MDBBtn
-            color="dark"
-            aria-controls="exampleModal2"
-            @click="exampleModal2 = true"
-          >
-            Update/Edit
-          </MDBBtn>
-          <router-link
-            :to="{
-              name: 'Admin',
-            }"
-          >
-            <MDBBtn
-              tag="a"
-              href="#!"
-              color="danger"
-              @click.prevent="deleteProduct(_id)"
-              >Delete</MDBBtn
-            >
-          </router-link>
         </div>
       </div>
     </div>
     <div v-else>
       <p class="my-5">Loading product details...</p>
-
     </div>
   </div>
+</div>
+  
 </template>
 
 <script scoped>
@@ -80,6 +56,7 @@ export default {
   },
   data() {
     return {
+      id: "",
       product: null,    
       title: "",
       category: "",
@@ -90,7 +67,7 @@ export default {
     };
   },
   mounted() {
-    fetch("https://eccomerce-backend.herokuapp.com/products" + this._id, {
+    fetch("https://eccomerce-backend.herokuapp.com/products" + this.id, {
       method: "GET",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

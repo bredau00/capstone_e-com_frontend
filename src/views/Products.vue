@@ -78,47 +78,12 @@
                     >
                     <MDBBtn tag="a" href="#!" color="dark">view</MDBBtn>
                     </router-link>
-                    <!-- Single project modal -->
-                      <MDBModal
-                        id="exampleModal"
-                        tabindex="-1"
-                        labelledby="exampleModalLabel"
-                        v-model="exampleModal"
-                        size="xl"
-                      >
-                        <MDBModalHeader>
-                          <MDBModalTitle id="exampleModalLabel">Single Product view</MDBModalTitle>
-                        </MDBModalHeader>
-                        <MDBModalBody>
-                          <MDBCard class="mb-3">
-                            <MDBRow class="g-0">
-                              <MDBCol md="4"> 
-                                <a class="card">
-                                    <MDBCardImg :src="product.img_front" :alt="product.title" />
-                                    <MDBCardImg :src="product.img_back" class="img-top" :alt="product.title" />
-                                </a>
-                              </MDBCol>
-                              <MDBCol md="8">
-                                <MDBCardBody>
-                                  <MDBCardTitle> {{ product.title }} </MDBCardTitle>
-                                  <MDBCardText>{{ product.category }}</MDBCardText>
-                                  <MDBCardText>R{{ product.price }}</MDBCardText>
-                                </MDBCardBody>
-                              </MDBCol>
-                            </MDBRow>
-                          </MDBCard>
-                        </MDBModalBody>
-                        <MDBModalFooter>
-                          <MDBBtn color="secondary" @click="exampleModal = false">Close</MDBBtn>
-                          <MDBBtn tag="a" href="#!" color="dark">add to cart</MDBBtn>
-                        </MDBModalFooter>
-                      </MDBModal>
                     </MDBBtnGroup>
                 </MDBCardBody>
             </MDBCard>
         </div>
       </div>
-      <div v-else class="hollow-dots-spinner mx-auto" style="width: 200px" :style="spinnerStyle">
+      <div v-else class="hollow-dots-spinner mx-auto text-center" style="width: 200px" :style="spinnerStyle">
         <div class="dot"></div>
         <div class="dot"></div>
         <div class="dot"></div>
@@ -129,7 +94,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import {
   MDBCard, 
   MDBCardBody, 
@@ -154,6 +118,7 @@ import {
     props: ["id"],
     data() {
     return {
+      product_id: "",
       product: null,
       products: [],
       filterProducts: null,
