@@ -220,7 +220,7 @@
             <option value="Tops">Tops</option>
             <option value="Bottoms">Bottoms</option>
             <option value="Accessories">Accessories</option>
-        </select>
+        </select><br>
 
         <!-- img front input -->
         <MDBInput
@@ -285,6 +285,7 @@
             <option value="Bottoms">Bottoms</option>
             <option value="Accessories">Accessories</option>
         </select>
+        <br>
   
         <!-- img front input -->
         <MDBInput
