@@ -62,7 +62,7 @@
         <MDBCard class="" style="max-height: 300px" >
           <MDBCardBody>
             <MDBRow class="g-0">
-              <MDBCol  md="4">
+              <MDBCol md="4">
                 <MDBCardImg style="max-width: 200px" :src="product.img_front" :alt="product.title" />
               </MDBCol>
               <MDBCol md="8">
@@ -532,7 +532,7 @@ import {
           axios
             .delete(apiURL, config)
             .then(() => {
-              this.users.splice(indexOfArrayItem, 1);
+              this.users.remove(indexOfArrayItem, 1);
             })
             .catch((error) => {
               console.log(error);
@@ -573,6 +573,7 @@ import {
       }
     },
   },
+
   computed: {
     filterProducts: function () {
       return this.products.filter((product) => {;
@@ -587,9 +588,11 @@ import {
 /* .tab {
   background-color:#262626 ;
 } */
+
+/* img switch */
 .card:hover .img-top {
         display: inline;
-    }
+}
 
 .card .img-top {
         display: none;
@@ -597,7 +600,9 @@ import {
         top: 0;
         left: 0;
         z-index: 99;
-    }
+}
+
+
 /* loading */
 .hollow-dots-spinner, .hollow-dots-spinner * {
       box-sizing: border-box;
